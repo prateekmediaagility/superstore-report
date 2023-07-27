@@ -46,6 +46,12 @@ view: orders {
     type: number
     sql: ${TABLE}.Discount ;;
   }
+
+  measure: total_discount {
+    type: sum
+    sql: ${discount};;
+    value_format: "0.000,,\" M\""
+  }
   # Dates and timestamps can be represented in Looker using a dimension group of type: time.
   # Looker converts dates and timestamps to the specified timeframes within the dimension group.
 
@@ -71,7 +77,10 @@ view: orders {
     type: string
     sql: ${TABLE}.Product_Name ;;
   }
-
+measure: product_cont {
+  type: count_distinct
+  sql: ${product_name} ;;
+}
   dimension: profit {
     type: number
     sql: ${TABLE}.Profit ;;
@@ -83,14 +92,22 @@ view: orders {
 
   measure: total_profit {
     type: sum
-    sql: ${profit} ;;  }
+    sql: ${profit} ;;
+    value_format: "0.000,,\" M\""
+    }
   measure: average_profit {
     type: average
-    sql: ${profit} ;;  }
+    sql: ${profit} ;;
+    value_format: "0.000,,\" M\""}
 
   dimension: quantity {
     type: number
     sql: ${TABLE}.Quantity ;;
+  }
+  measure: total_quantity {
+    type: sum
+    sql: ${quantity} ;;
+    value_format: "0.000,,\" M\""
   }
 
   dimension: region {
@@ -106,6 +123,12 @@ view: orders {
   dimension: sales {
     type: number
     sql: ${TABLE}.Sales ;;
+  }
+  measure: total_sales {
+    type: sum
+    sql: ${sales} ;;
+    value_format: "0.000,,\" M\""
+
   }
 
   dimension: segment {
